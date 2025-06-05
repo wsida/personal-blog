@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue-jsx": "^4.2.0",
+    "element-plus": "^2.9.11",
+    "vitepress-theme-demoblock": "^3.1.3"
+  }
+}
