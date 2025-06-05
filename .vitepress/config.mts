@@ -12,6 +12,7 @@ export default defineConfig({
   base: '/personal-blog/',
   title: 'wangsd-blog',
   description: 'a simple personal blog',
+  head: [['link', { rel: 'icon', href: '/personal-blog/favicon.ico' }]],
   themeConfig: {
     siteTitle: 'Wangsd',
     logo: '/svg/橘猫.svg',
