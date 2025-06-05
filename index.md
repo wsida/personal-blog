@@ -7,7 +7,7 @@ hero:
   text: "A simple personal blog"
   tagline: Built on Vitepress...
   image:
-    src: /public/images/icon.jpeg
+    src: /images/icon.jpeg
     alt: Wangsd
   actions:
     - theme: brand

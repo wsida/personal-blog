@@ -14,7 +14,7 @@ export default defineConfig({
   description: 'a simple personal blog',
   themeConfig: {
     siteTitle: 'Wangsd',
-    logo: '/public/svg/橘猫.svg',
+    logo: '/svg/橘猫.svg',
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
