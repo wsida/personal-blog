@@ -9,6 +9,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/wsida/',
   title: 'wangsd-blog',
   description: 'a simple personal blog',
   themeConfig: {
