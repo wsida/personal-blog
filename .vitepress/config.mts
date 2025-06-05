@@ -14,11 +14,12 @@ export default defineConfig({
   description: 'a simple personal blog',
   themeConfig: {
     siteTitle: 'Wangsd',
-    logo: '/statics/svg/橘猫.svg',
+    logo: '/public/svg/橘猫.svg',
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
       { text: '文章', link: '/pages/article/' },
+      { text: '笔记', link: '/pages/note/' },
     ],
 
     sidebar: [
@@ -29,6 +30,10 @@ export default defineConfig({
       {
         text: '文章',
         link: '/pages/article/',
+      },
+      {
+        text: '笔记',
+        link: '/pages/note/',
       },
       {
         text: '作品集',
@@ -61,7 +66,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@': path.join(__dirname, '../statics'),
+        '@': path.join(__dirname, '../public'),
       },
     },
     plugins: [
