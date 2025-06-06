@@ -66,11 +66,6 @@ export default defineConfig({
     }
   },
   vite: {
-    resolve: {
-      alias: {
-        '@': path.join(__dirname, '../public'),
-      },
-    },
     plugins: [
       demoblockVitePlugin(),
       // jsx、tsx语法支持

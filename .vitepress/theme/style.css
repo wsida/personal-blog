@@ -159,3 +159,10 @@
 .el-timeline {
   list-style: none !important;
 }
+
+.el-link {
+  --el-color-primary: var(--vp-code-color);
+  &::after {
+    display: none !important;
+  }
+}
