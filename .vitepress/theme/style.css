@@ -42,7 +42,7 @@
  * - `danger`: Used to show error, or dangerous message to the users. Used
  *   in custom container, badges, etc.
  * -------------------------------------------------------------------------- */
-@import "element-plus/dist/index.css";
+@import 'element-plus/dist/index.css';
 
 :root {
   --vp-c-default-1: var(--vp-c-gray-1);
@@ -146,4 +146,16 @@
   --demoblock-border: var(--vp-c-divider);
   color: var(--el-text-color-regular);
   /* --demoblock-border: #e7e8e9; */
+}
+
+.el-descriptions__table {
+  display: table !important;
+}
+
+.el-descriptions__table tr:nth-child(2n) {
+  background-color: transparent !important;
+}
+
+.el-timeline {
+  list-style: none !important;
 }

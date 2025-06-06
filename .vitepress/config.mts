@@ -6,6 +6,7 @@ import {
 } from 'vitepress-theme-demoblock';
 // import vue from "@vitejs/plugin-vue";
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import UnoCSS from 'unocss/vite'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -74,6 +75,7 @@ export default defineConfig({
       demoblockVitePlugin(),
       // jsx、tsx语法支持
       vueJsx(),
+      UnoCSS(),
     ],
   },
 });

@@ -1,6 +1,7 @@
 // https://vitepress.dev/guide/custom-theme
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
+import 'virtual:uno.css'
 import './style.css'
 import DefaultTheme from 'vitepress/theme'
 import "vitepress-theme-demoblock/dist/theme/styles/index.css";
