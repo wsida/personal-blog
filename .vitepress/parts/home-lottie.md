@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import lottie from 'lottie-web';
-import lottieJson from '@/lottie/letmesee.json';
+import lottieJson from '@/asserts/lottie/letmesee.json';
 
 const mounted = ref(false);
 const lottieRef = ref();

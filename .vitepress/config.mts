@@ -68,7 +68,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@': path.join(__dirname, '..', 'public'),
+        '@': path.join(__dirname, '..'),
       },
     },
     plugins: [
