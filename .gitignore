@@ -4,3 +4,6 @@ dist
 .vitepress/cache/
 .vitepress/cache/deps/
 cache/
+.vitepress/cache/deps/_metadata.json
+.vitepress/cache/deps/element-plus.js
+.vitepress/cache/deps/element-plus.js.map
