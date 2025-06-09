@@ -7,8 +7,9 @@ hero:
   text: "A simple personal blog"
   tagline: Built on Vitepress...
   image:
-    src: /images/icon.jpeg
+    # src: /images/icon.jpeg
     alt: Wangsd
+    lottie: true
   actions:
     - theme: brand
       text: 关于我
@@ -29,3 +30,4 @@ features:
     details: 最好的放松时刻就是旅行，如果囊肿不羞涩，我可以全年都在旅行路上，当然是我最爱的女朋友一起...
 ---
 
+<!--@include: ./.vitepress/parts/home-lottie.md-->

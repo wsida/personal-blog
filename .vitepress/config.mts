@@ -6,7 +6,7 @@ import {
 } from 'vitepress-theme-demoblock';
 // import vue from "@vitejs/plugin-vue";
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import UnoCSS from 'unocss/vite'
+import UnoCSS from 'unocss/vite';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -55,17 +55,22 @@ export default defineConfig({
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2025-present Wangsd'
-    }
+      copyright: 'Copyright © 2025-present Wangsd',
+    },
   },
   markdown: {
-    config: md => {
+    config: (md) => {
       md.use(demoblockPlugin, {
-        customClass: "wsd-demoblock-custom"
+        customClass: 'wsd-demoblock-custom',
       });
-    }
+    },
   },
   vite: {
+    resolve: {
+      alias: {
+        '@': path.join(__dirname, '..', 'public'),
+      },
+    },
     plugins: [
       demoblockVitePlugin(),
       // jsx、tsx语法支持
