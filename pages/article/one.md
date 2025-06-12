@@ -7,7 +7,7 @@ next: false
 title: article
 articleTime: 2025/06/07
 articleTags: Vue,Vite,VitePress
-articleTitle: VitePress 基本功能及 Vitepress-theme-demoblock 插件使用指南
+articleTitle: 什么是VitePress
 articleSummary: VitePress 是一个由 Vite 驱动的静态站点生成器（SSG），专为快速构建技术文档、博客等轻量级网站设计。它基于 Vue.js，具有简洁的配置、快速的热更新和良好的性能，能够帮助开发者轻松搭建美观且功能强大的文档站点。
 ---
 
