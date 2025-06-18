@@ -21,6 +21,11 @@ noteSummary: 这是我在开发微信小程序中遇到的坑，再此记录以�
 
 ## map组件
 
+### 问题
+
+- wx.chooseLocation 在地址联想列表中选择同一个位置，地址可能不相同，存在精度问题【需要对精度做处理进行判断】
+- map设置scale属性会被自动取整，与mapContext.getScale获取的缩放层级精度不一致
+
 ### 地图坐标/屏幕坐标的转换
 
 > mapContext的实例方法 `toScreenLocation`、`fromScreenLocation` 兼容问题，PC/开发工具不可用❌
@@ -191,4 +196,46 @@ export interface ScreenLocation {
 }
 
 export const MAP_RADIUS = 6378137;
+```
+
+### 坐标是否相等判断
+
+```typescript
+/**
+ * 比较两个坐标在指定精度下是否相等
+ * @param {MapLocation} coord1 - 第一个坐标，格式：{x: number, y: number}
+ * @param {MapLocation} coord2 - 第二个坐标，格式：{x: number, y: number}
+ * @param {number} [precision=2] - 保留的小数位数，默认2位
+ * @returns {boolean} - 如果两个坐标在指定精度下相等，返回true，否则返回false
+ */
+export function isSamePosition(
+    coord1: MapLocation,
+    coord2: MapLocation,
+    precision = 5
+): Boolean {
+    // 检查输入是否为有效的坐标对象
+    if (
+        !coord1 ||
+        !coord2 ||
+        typeof coord1.longitude !== "number" ||
+        typeof coord1.latitude !== "number" ||
+        typeof coord2.longitude !== "number" ||
+        typeof coord2.latitude !== "number"
+    ) {
+        console.error(
+            "[isSamePosition]: Invalid coordinates provided. Each coordinate must be an object with numeric longitude and latitude properties."
+        );
+
+        return false;
+    }
+
+    // 计算指定精度下的容差值
+    const tolerance = 0.5 / Math.pow(10, precision);
+
+    // 比较每个坐标分量在指定精度下是否相等
+    return (
+        Math.abs(coord1.longitude - coord2.longitude) < tolerance &&
+        Math.abs(coord1.latitude - coord2.latitude) < tolerance
+    );
+}
 ```
