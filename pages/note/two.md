@@ -25,6 +25,9 @@ noteSummary: 这是我在开发微信小程序中遇到的坑，再此记录以�
 
 - wx.chooseLocation 在地址联想列表中选择同一个位置，地址可能不相同，存在精度问题【需要对精度做处理进行判断】
 - map设置scale属性会被自动取整，与mapContext.getScale获取的缩放层级精度不一致
+- 自定义标记Marker的标签label定位差异：IOS默认居中对齐坐标，Android默认左对齐坐标【需要偏移anchorX】
+- IOS无法监听自定义聚合点点击事件，需要自定判断点击位置是否是聚合点
+- PC端使用鼠标缩放层级无法触发 regionchange 事件
 
 ### 地图坐标/屏幕坐标的转换
 
