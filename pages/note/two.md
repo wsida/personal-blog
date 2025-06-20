@@ -28,6 +28,7 @@ noteSummary: 这是我在开发微信小程序中遇到的坑，再此记录以�
 - 自定义标记Marker的标签label定位差异：IOS默认居中对齐坐标，Android默认左对齐坐标【需要偏移anchorX】
 - IOS无法监听自定义聚合点点击事件，需要自定判断点击位置是否是聚合点
 - PC端使用鼠标缩放层级无法触发 regionchange 事件
+- PC端标记Marker层级问题-只能重绘Marker保证生效（新的Marker 覆盖 旧的Marker）
 
 ### 地图坐标/屏幕坐标的转换
 
