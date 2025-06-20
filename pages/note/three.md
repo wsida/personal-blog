@@ -1,3 +1,17 @@
+---
+layout: doc
+navbar: true
+sidebar: false
+prev: false
+next: false
+title: note
+noteTime: 2025/06/16
+noteTitle: 微信小程序Map入坑
+noteSummary: 微信小程序的map组件真的是坑
+---
+
+<!--@include: ../../.vitepress/parts/note-child.md-->
+
 # 兼容概览
 
 | 功能点\设备 | ios | android/ohos | mac | window | devtool |
@@ -12,6 +26,7 @@
 | 聚合点变化事件 | ❌无法触发事件 | ❌无法触发事件 | ❌无法触发事件 | ❌无法触发事件 | ❌无法触发事件 |
 | 地图点击事件差异 | ✅正常 | ✅正常 | ❌点击地图自带的标记无法触发事件 | ❌点击地图自带的标记无法触发事件 | ❌点击地图自带的标记无法触发事件 |
 | 地图点击缩放级别精度问题 | ❌精度问题 | ❌精度问题 | ❌精度问题 | ❌精度问题 | ❌精度问题 |
+| `toScreenLocation`、`fromScreenLocation` 兼容问题 | ✅正常 | ✅正常 | ❌无用 | ❌无用 | ❌无用 |
 
 # 功能影响
 
