@@ -29,6 +29,8 @@ noteSummary: 这是我在开发微信小程序中遇到的坑，再此记录以�
 - IOS无法监听自定义聚合点点击事件，需要自定判断点击位置是否是聚合点
 - PC端使用鼠标缩放层级无法触发 regionchange 事件
 - PC端标记Marker层级问题-只能重绘Marker保证生效（新的Marker 覆盖 旧的Marker）
+- Android 两个点重叠不会触发聚合，只有三个点才会聚合
+- Android 自定义marker和自定义聚合点同时存在，有时候点击单个marker点不能触发 marker click事件
 
 ### 地图坐标/屏幕坐标的转换
 
