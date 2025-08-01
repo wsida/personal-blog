@@ -177,7 +177,7 @@ export function mercatorYToLat(mercatorY: number): number {
     const y = mercatorY / 6378137;
     const lat = ((2 * Math.atan(Math.exp(y)) - Math.PI / 2) * 180) / Math.PI;
     return lat;
-}ß
+}
 ```
 
 类型
