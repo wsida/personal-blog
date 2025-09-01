@@ -71,6 +71,7 @@ export default defineConfig({
         '@': path.join(__dirname, '..'),
       },
     },
+    assetsInclude: ['**/*.JPG', '**/*.jpg'],
     plugins: [
       demoblockVitePlugin(),
       // jsx、tsx语法支持
