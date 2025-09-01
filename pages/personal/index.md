@@ -34,7 +34,7 @@ import { ref, computed } from 'vue'
 import { withBase } from 'vitepress'
 const images = ref([]);
 
-const imageAsserts = import.meta.glob('/public/images/carousel/*.JPG');
+const imageAsserts = import.meta.glob('/public/images/carousel/*.JPG?raw', { as: 'blob' });
 // console.log('>>>imageAsserts', imageAsserts)
 for (const path in imageAsserts) {
   const name = path.split('/').pop().replace(/\.(JPG)$/, '');
