@@ -30,8 +30,20 @@ title: personal
 
 <script setup>
 import { Picture as IconPicture } from '@element-plus/icons-vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { withBase } from 'vitepress'
+const images = ref([]);
+
+const imageAsserts = import.meta.glob('/public/images/carousel/*.JPG');
+// console.log('>>>imageAsserts', imageAsserts)
+for (const path in imageAsserts) {
+  const name = path.split('/').pop().replace(/\.(JPG)$/, '');
+  images.value.push({
+    name,
+    src: withBase(path.replace(/^\/public/, '')),
+  })
+}
+
 
 const options = ref([
   {
@@ -86,6 +98,13 @@ const interest = ref([
   ['麻将', '户外野营'],
   ['旅行', '逗猫', '户外散步'],
 ])
+const blobs = ref([
+  { name: '掘金', href: 'https://juejin.cn/user/2339351730073710', icon: '' },
+  { name: 'CSDN', href: 'https://blog.csdn.net/Wang_Si_D?type=blog', icon: '' },
+  { name: 'Github', href: 'https://github.com/', icon: '' }
+])
+
+const imageUrls = computed(() => images.value.map(item => item.src));
 </script>
 
 <el-segmented class="mb-6" v-model="tab" size="large" :options="options" />
@@ -107,9 +126,11 @@ const interest = ref([
   <el-col :xs="24" :sm="24" :md="16" :lg="18">
     <el-descriptions title="我的简介" :column="2" label-width="80px" size="large" border>
       <el-descriptions-item label="姓名">汪思达</el-descriptions-item>
-      <el-descriptions-item label="手机号">136****8177</el-descriptions-item>
+      <el-descriptions-item label="学历">本科</el-descriptions-item>
       <el-descriptions-item label="籍贯">福建泉州</el-descriptions-item>
       <el-descriptions-item label="民族">汉族</el-descriptions-item>
+      <el-descriptions-item label="手机号">136****8177</el-descriptions-item>
+      <el-descriptions-item label="邮箱">975784914@qq.com</el-descriptions-item>
       <el-descriptions-item label="地址">福建省泉州市丰泽区**街道****</el-descriptions-item>
     </el-descriptions>
     <el-descriptions title="我的技能" :column="1" label-width="80px" size="large" border>
@@ -206,5 +227,51 @@ const interest = ref([
 
 <!--个人展示-->
 <div v-show="tab === options[3].value">
-  <el-empty description="小编还在努力整理～" />
+  <!-- <el-empty description="小编还在努力整理～" /> -->
+  <!--拍摄-->
+  <el-timeline>
+    <el-timeline-item
+      timestamp="📷拍照"
+      placement="top"
+    >
+      <el-carousel
+        indicator-position="none"
+        height="360px"
+        class="mt-6"
+        :interval="5000"
+      >
+        <el-carousel-item v-for="(item, index) in images" :key="item.name">
+          <div class="w-full h-full flex! justify-center items-centers">
+            <el-image
+              class="block relative w-auto h-full max-h-[360px]"
+              :src="item.src"
+              :max-scale="7"
+              :min-scale="0.2"
+              :preview-src-list="imageUrls"
+              :initial-index="index"
+              :alt="item.name"
+              fit="cover"
+              preview-teleported
+            ></el-image>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
+    </el-timeline-item>
+    <el-timeline-item
+      timestamp="📄博客"
+      placement="top"
+    >
+      <el-row class="mt-6">
+        <el-button v-for="blob in blobs">
+          <el-link :href="blob.href" target="_blank">{{ blob.name }}</el-link>
+        </el-button>
+      </el-row>
+    </el-timeline-item>
+    <el-timeline-item
+      timestamp="💻教学"
+      placement="top"
+    >
+      <el-empty description="小编还在努力整理～" />
+    </el-timeline-item>
+  </el-timeline>
 </div>
