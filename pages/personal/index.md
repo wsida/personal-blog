@@ -35,7 +35,7 @@ import { withBase } from 'vitepress'
 const images = ref([]);
 
 const imageAsserts = import.meta.glob('/asserts/carousel/*.JPG', { as: 'url', eager: true });
-console.log('>>>imageAsserts', imageAsserts)
+// console.log('>>>imageAsserts', imageAsserts)
 for (const path in imageAsserts) {
   const name = path.split('/').pop().replace(/\.(JPG)$/, '');
   images.value.push({
