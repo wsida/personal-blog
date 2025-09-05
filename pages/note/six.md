@@ -51,7 +51,7 @@ noteSummary: 收集一些常见组件功能功能的实现方法一二三，从�
   - 为path填充颜色即可
 - 注意
   - path路径：先绘制屏幕大小的路径后（z结束路径），然后在重新绘制触发器大小的路径，带圆角需要用到 arc 弧线
-  - 需要掌握path路径语法：move/M，line/L，arc/a，close/Z
+  - 需要掌握path路径语法：move/M，line/L/V/H，ellipse/a，closePath/Z
   - path遮罩节点要禁止鼠标点击，path节点需要指定`pointer-events:auto`
   - 通过path节点实现的挖空区域，不属于path这个节点，可以直接点击透传下层节点，但是svg需要指定`pointer-events:none`，否则点击事件会到svg节点上
 
