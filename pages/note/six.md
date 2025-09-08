@@ -32,6 +32,22 @@ noteSummary: 收集一些常见组件功能功能的实现方法一二三，从�
   - 最后通过 URL.createObjectURL() 将 Blob 对象生成临时 URL
 - 设置 background 样式，添加repeat平铺方式
 
+```js
+// 将SVG转换为字符串
+const serializer = new XMLSerializer();
+let svgStr = serializer.serializeToString(svgDOM);
+// 关键：添加XML声明以确保正确解析
+svgStr = '<?xml version="1.0" standalone="no"?>\r\n' + svgStr;
+// 创建Blob对象
+const svgBlob = new Blob([svgStr], {
+  type: 'image/svg+xml',
+});
+// 创建Blob URL
+return URL.createObjectURL(svgBlob);
+```
+
+<hr>
+
 # Guide引导组件-挖空遮罩实现
 
 ## 基于box-shadow
