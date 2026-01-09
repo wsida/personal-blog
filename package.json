@@ -6,6 +6,7 @@
     "vitepress": "^1.6.3"
   },
   "scripts": {
+    "build:icalendar": "node ./icalendar/index.js",
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"

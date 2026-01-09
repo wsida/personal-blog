@@ -1,6 +1,11 @@
 name: Deploy VitePress site to Pages
 
 on:
+  # 定时触发器（核心）
+  schedule:
+    # cron表达式：分 时 日 月 周（GitHub使用UTC时区）
+    # 以下表示 UTC时间 每年1月1日 0点0分 触发
+    - cron: '0 0 1 1 *'
   push:
   #分支名字
     branches: [master]
@@ -34,6 +39,9 @@ jobs:
         uses: actions/configure-pages@v4  # 在工作流程自动配置GithubPages
       - name: Install dependencies
         run: pnpm install # 安装依赖
+      - name: Build iCalendar
+        run: |
+          pnpm run build:icalendar # 生成 iCalendar 文件
       - name: Build with VitePress
         run: |
           pnpm run docs:build # 启动项目
