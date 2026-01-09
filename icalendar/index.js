@@ -11,15 +11,12 @@ const FileName = 'icalendar.ics';
 
 const ICS_Template = `
   BEGIN:VCALENDAR
-  VERSION:{{version}}
   PRODID:{{prodId}}
+  VERSION:{{version}}
   CALSCALE:{{calScale}}
-  X-WR-CALNAME:农历纪念日
-  X-APPLE-LANGUAGE:zh
-  X-APPLE-REGION:CN
-
+  X-WR-CALNAME:我们的纪念日
+  X-WR-CALDESC:我们的纪念日 更新时间{{updateTime}}
   {{events}}
-
   END:VCALENDAR
 `;
 
@@ -41,7 +38,8 @@ const ICS_Event_Template = `
 function generateContent() {
   let wrapper = ICS_Template.replace('{{version}}', CalendarJson.version)
     .replace('{{prodId}}', CalendarJson.prodId)
-    .replace('{{calScale}}', CalendarJson.calScale);
+    .replace('{{calScale}}', CalendarJson.calScale)
+    .replace('{{updateTime}}', new Dayjs().format('YYYY-MM-DD HH:mm:ss'));
 
   let eventsStr = '';
 
@@ -64,7 +62,7 @@ function generateContent() {
           solarDate2.getMonth() - 1,
           solarDate2.getDay()
         ).toISOString()
-      ), '//a');
+      ), '_prev');
     } else {
       eventsStr += generateEvent(event, new Dayjs(
         new Date(year, event.month - 1, event.day).toISOString()
@@ -78,7 +76,7 @@ function generateContent() {
 function generateEvent(event, currentDate, suffix = '') {
   return ICS_Event_Template.replace(
     '{{uid}}',
-    CalendarJson.prodId + event.uid + suffix
+    event.uid + suffix + '@wangsd.com'
   )
     .replace(
       '{{timestamp}}',

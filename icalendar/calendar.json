@@ -1,10 +1,10 @@
 {
-  "version": "1.0.0",
-  "prodId": "//wangsd and xuxy//customized anniversary//ZH",
+  "version": "1.0",
+  "prodId": "-//wangsd and xuxy//customized anniversary//CN",
   "calScale": "GREGORIAN",
   "events": [
     {
-      "uid": "//event//confession",
+      "uid": "event_confession",
       "lunar": 0,
       "day": 24,
       "month": 2,
@@ -14,7 +14,7 @@
       "comment": ""
     },
     {
-      "uid": "//event//get-married",
+      "uid": "event_get-married",
       "lunar": 0,
       "day": 25,
       "month": 2,
@@ -24,7 +24,7 @@
       "comment": ""
     },
     {
-      "uid": "//event//birthday-wife-new",
+      "uid": "event_birthday-wife-new",
       "lunar": 1,
       "day": 16,
       "month": 12,
@@ -34,7 +34,7 @@
       "comment": "农历腊月十六，每年公历日期不同，建议每年年初检查校准"
     },
     {
-      "uid": "//event//birthday-myself",
+      "uid": "event_birthday-myself",
       "lunar": 1,
       "day": 27,
       "month": 2,
@@ -44,7 +44,7 @@
       "comment": "农历腊月十六，每年公历日期不同，建议每年年初检查校准"
     },
     {
-      "uid": "//event//engagement-lunar",
+      "uid": "event_engagement-lunar",
       "lunar": 1,
       "day": 20,
       "month": 12,
@@ -54,7 +54,7 @@
       "comment": "农历腊月二十，每年公历日期不同，建议每年年初检查校准"
     },
     {
-      "uid": "//event//engagement",
+      "uid": "event_engagement",
       "lunar": 0,
       "day": 19,
       "month": 1,
@@ -64,7 +64,7 @@
       "comment": ""
     },
     {
-      "uid": "//event//married",
+      "uid": "event_married",
       "lunar": 0,
       "day": 3,
       "month": 10,
@@ -74,7 +74,7 @@
       "comment": ""
     },
     {
-      "uid": "//event//married-lunar",
+      "uid": "event_married-lunar",
       "lunar": 1,
       "day": 12,
       "month": 8,
@@ -84,7 +84,7 @@
       "comment": ""
     },
     {
-      "uid": "//event//birthday-wife",
+      "uid": "event_birthday-wife",
       "lunar": 1,
       "day": 14,
       "month": 10,
