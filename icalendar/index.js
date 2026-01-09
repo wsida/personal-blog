@@ -3,62 +3,83 @@ const path = require('node:path');
 const CalendarJson = require('./calendar.json');
 const { Lunar } = require('lunar-javascript');
 const Dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone') // 依赖 utc 插件
+
+Dayjs.extend(utc);
+Dayjs.extend(timezone);
+
+const localTimezone = Dayjs.tz.guess();
+// Dayjs.tz.setDefault('Asia/Shanghai');
 
 console.log('🛠️  icalendar/index.js 脚本开始执行...');
 
 const DirName = '../public/';
 const FileName = 'icalendar.ics';
 
-const ICS_Template = `
-  BEGIN:VCALENDAR
-  PRODID:{{prodId}}
-  VERSION:{{version}}
-  CALSCALE:{{calScale}}
-  X-WR-CALNAME:我们的纪念日
-  X-WR-CALDESC:我们的纪念日 更新时间{{updateTime}}
-  {{events}}
-  END:VCALENDAR
+const ICS_Template = `BEGIN:VCALENDAR
+PRODID:{{prodId}}
+VERSION:{{version}}
+CALSCALE:{{calScale}}
+METHOD:PUBLISH
+X-WR-CALNAME:我们的纪念日
+X-WR-TIMEZONE:{{tzone}}
+X-WR-CALDESC:我们的纪念日 更新时间{{updateTime}}
+BEGIN:VTIMEZONE
+TZID:{{tzone}}
+X-LIC-LOCATION:{{tzone}}
+BEGIN:STANDARD
+TZOFFSETFROM:{{timezone}}
+TZOFFSETTO:{{timezone}}
+TZNAME:CST
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+{{events}}END:VCALENDAR
+
 `;
 
-const ICS_Event_Template = `
-  BEGIN:VEVENT
-  UID:{{uid}}
-  DTSTAMP:{{timestamp}}
-  DTSTART;VALUE=DATE:{{startDate}}
-  DTEND;VALUE=DATE:{{endDate}}
-  SUMMARY:{{summary}}
-  DESCRIPTION:{{description}}
-  STATUS:{{status}}
-  TRANSP:TRANSPARENT
-  RRULE:FREQ=YEARLY;INTERVAL=1;
-  COMMENT:{{comment}}
-  END:VEVENT
-`;
+const ICS_Event_Template = `BEGIN:VEVENT
+UID:{{uid}}
+DTSTAMP:{{timestamp}}
+DTSTART;VALUE=DATE:{{startDate}}
+DTEND;VALUE=DATE:{{endDate}}
+CREATED:{{ctimestamp}}
+SUMMARY:{{summary}}
+DESCRIPTION:{{description}}
+SEQUENCE:0
+TRANSP:TENTATIVE
+STATUS:CONFIRMED
+END:VEVENT\n`;
 
 function generateContent() {
   let wrapper = ICS_Template.replace('{{version}}', CalendarJson.version)
     .replace('{{prodId}}', CalendarJson.prodId)
     .replace('{{calScale}}', CalendarJson.calScale)
-    .replace('{{updateTime}}', new Dayjs().format('YYYY-MM-DD HH:mm:ss'));
+    .replace('{{updateTime}}', new Dayjs().format('YYYY-MM-DD HH:mm:ss'))
+    .replaceAll('{{tzone}}', localTimezone)
+    .replaceAll('{{timezone}}', Dayjs().tz(localTimezone).format('ZZ'));
 
   let eventsStr = '';
 
   for (const event of CalendarJson.events) {
     const year = new Date().getFullYear();
     if (!!event.lunar) {
-      const lunarDate = Lunar.fromYmd(year, event.month, event.day);
-      const solarDate2 = lunarDate.getSolar();
+      const lunarDate1 = Lunar.fromYmd(year, event.month, event.day);
+      const lunarDate2 = Lunar.fromYmd(year - 1, event.month, event.day);
+      const solarDate1 = lunarDate1.getSolar();
+      const solarDate2 = lunarDate2.getSolar();
       eventsStr += generateEvent(event, new Dayjs(
         new Date(
-          solarDate2.getYear(),
-          solarDate2.getMonth() - 1,
-          solarDate2.getDay()
+          solarDate1.getYear(),
+          solarDate1.getMonth() - 1,
+          solarDate1.getDay()
         ).toISOString()
       ));
 
       eventsStr += generateEvent(event, new Dayjs(
         new Date(
-          solarDate2.getYear() - 1,
+          solarDate2.getYear(),
           solarDate2.getMonth() - 1,
           solarDate2.getDay()
         ).toISOString()
@@ -74,29 +95,32 @@ function generateContent() {
 }
 
 function generateEvent(event, currentDate, suffix = '') {
+  const cdateIOS = new Dayjs().tz(localTimezone).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+  const dateIOS = currentDate.tz(localTimezone).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   return ICS_Event_Template.replace(
     '{{uid}}',
     event.uid + suffix + '@wangsd.com'
   )
     .replace(
       '{{timestamp}}',
-      `${currentDate
-        .toISOString()
+      `${dateIOS
         .replace(/[-:\.]/g, '')
         .slice(0, 15)}Z`
     )
+    .replace('{{ctimestamp}}',
+      `${cdateIOS
+        .replace(/[-:\.]/g, '')
+        .slice(0, 15)}Z`)
     .replace(
       '{{startDate}}',
-      currentDate.toISOString().slice(0, 10).replace(/-/g, '')
+      dateIOS.slice(0, 10).replace(/-/g, '')
     )
     .replace(
       '{{endDate}}',
-      currentDate.toISOString().slice(0, 10).replace(/-/g, '')
+      dateIOS.slice(0, 10).replace(/-/g, '')
     )
-    .replace('{{summary}}', event.summary || '')
-    .replace('{{description}}', event.description || '')
-    .replace('{{status}}', event.status || 'CONFIRMED')
-    .replace('{{comment}}', event.comment || '');
+    .replace('{{summary}}', event.summary)
+    .replace('{{description}}', event.description || '这是描述信息')
 }
 
 function writeICS() {
