@@ -47,51 +47,58 @@ function generateContent() {
 
   for (const event of CalendarJson.events) {
     const year = new Date().getFullYear();
-    let currentDate;
     if (!!event.lunar) {
       const lunarDate = Lunar.fromYmd(year, event.month, event.day);
       const solarDate2 = lunarDate.getSolar();
-      currentDate = new Dayjs(
+      eventsStr += generateEvent(event, new Dayjs(
         new Date(
           solarDate2.getYear(),
           solarDate2.getMonth() - 1,
           solarDate2.getDay()
         ).toISOString()
-      );
-    } else {
-      currentDate = new Dayjs(
-        new Date(year, event.month - 1, event.day).toISOString()
-      );
-    }
-    let eventStr = ICS_Event_Template.replace(
-      '{{uid}}',
-      CalendarJson.prodId + event.uid
-    )
-      .replace(
-        '{{timestamp}}',
-        `${currentDate
-          .toISOString()
-          .replace(/[-:\.]/g, '')
-          .slice(0, 15)}Z`
-      )
-      .replace(
-        '{{startDate}}',
-        currentDate.toISOString().slice(0, 10).replace(/-/g, '')
-      )
-      .replace(
-        '{{endDate}}',
-        currentDate.toISOString().slice(0, 10).replace(/-/g, '')
-      )
-      .replace('{{summary}}', event.summary || '')
-      .replace('{{description}}', event.description || '')
-      .replace('{{status}}', event.status || 'CONFIRMED')
-      .replace('{{comment}}', event.comment || '');
+      ));
 
-    eventsStr += eventStr;
+      eventsStr += generateEvent(event, new Dayjs(
+        new Date(
+          solarDate2.getYear() - 1,
+          solarDate2.getMonth() - 1,
+          solarDate2.getDay()
+        ).toISOString()
+      ), '//a');
+    } else {
+      eventsStr += generateEvent(event, new Dayjs(
+        new Date(year, event.month - 1, event.day).toISOString()
+      ));
+    }
   }
-  // TODO: 生成事件
 
   return wrapper.replace('{{events}}', eventsStr);
+}
+
+function generateEvent(event, currentDate, suffix = '') {
+  return ICS_Event_Template.replace(
+    '{{uid}}',
+    CalendarJson.prodId + event.uid + suffix
+  )
+    .replace(
+      '{{timestamp}}',
+      `${currentDate
+        .toISOString()
+        .replace(/[-:\.]/g, '')
+        .slice(0, 15)}Z`
+    )
+    .replace(
+      '{{startDate}}',
+      currentDate.toISOString().slice(0, 10).replace(/-/g, '')
+    )
+    .replace(
+      '{{endDate}}',
+      currentDate.toISOString().slice(0, 10).replace(/-/g, '')
+    )
+    .replace('{{summary}}', event.summary || '')
+    .replace('{{description}}', event.description || '')
+    .replace('{{status}}', event.status || 'CONFIRMED')
+    .replace('{{comment}}', event.comment || '');
 }
 
 function writeICS() {
