@@ -1,0 +1,97 @@
+{
+  "version": "1.0.0",
+  "prodId": "//wangsd and xuxy//customized anniversary//ZH",
+  "calScale": "GREGORIAN",
+  "events": [
+    {
+      "uid": "//event//confession",
+      "lunar": 0,
+      "day": 24,
+      "month": 2,
+      "summary": "我们互相表白啦❤️",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": ""
+    },
+    {
+      "uid": "//event//get-married",
+      "lunar": 0,
+      "day": 25,
+      "month": 2,
+      "summary": "我们领证啦❤️",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": ""
+    },
+    {
+      "uid": "//event//birthday-wife-new",
+      "lunar": 1,
+      "day": 16,
+      "month": 12,
+      "summary": "老婆的新生日🎂（农历腊月十六）",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": "农历腊月十六，每年公历日期不同，建议每年年初检查校准"
+    },
+    {
+      "uid": "//event//birthday-myself",
+      "lunar": 1,
+      "day": 27,
+      "month": 2,
+      "summary": "我的生日🎂（农历二月二七）",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": "农历腊月十六，每年公历日期不同，建议每年年初检查校准"
+    },
+    {
+      "uid": "//event//engagement-lunar",
+      "lunar": 1,
+      "day": 20,
+      "month": 12,
+      "summary": "我们订婚啦❤️（农历2025年腊月二十）",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": "农历腊月二十，每年公历日期不同，建议每年年初检查校准"
+    },
+    {
+      "uid": "//event//engagement",
+      "lunar": 0,
+      "day": 19,
+      "month": 1,
+      "summary": "我们订婚啦❤️（新历2025年1月19日）",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": ""
+    },
+    {
+      "uid": "//event//married",
+      "lunar": 0,
+      "day": 3,
+      "month": 10,
+      "summary": "我们结婚啦❤️（新历2025年10月3日）",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": ""
+    },
+    {
+      "uid": "//event//married-lunar",
+      "lunar": 1,
+      "day": 12,
+      "month": 8,
+      "summary": "我们结婚啦❤️（农历2025年八月十二）",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": ""
+    },
+    {
+      "uid": "//event//birthday-wife",
+      "lunar": 1,
+      "day": 14,
+      "month": 10,
+      "summary": "老婆的原生日🎂（农历十月十四）",
+      "description": "",
+      "status": "CONFIRMED",
+      "comment": ""
+    }
+  ]
+}
