@@ -52,11 +52,6 @@ jobs:
           cat > .nojekyll << EOF
           EOF
           cat > _headers << EOF
-          /*
-            # 允许跨域（CORS）
-            Access-Control-Allow-Origin: *
-            # 统一字符编码
-            Content-Type: text/html; charset=utf-8
           # 对所有 .json 文件指定 Content-Type
           /*.json
             Content-Type: application/json; charset=utf-8
