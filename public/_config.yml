@@ -1,0 +1,5 @@
+defaults:
+  - scope:
+      path: "icalendar.ics"
+    values:
+      content_type: "text/plain; charset=utf-8"
