@@ -2,15 +2,15 @@ const fs = require('node:fs');
 const path = require('node:path');
 const CalendarJson = require('./calendar.json');
 const { Lunar } = require('lunar-javascript');
-const Dayjs = require('dayjs');
+const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc')
 const timezone = require('dayjs/plugin/timezone') // 依赖 utc 插件
 
-Dayjs.extend(utc);
-Dayjs.extend(timezone);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
-const localTimezone = Dayjs.tz.guess();
-// Dayjs.tz.setDefault('Asia/Shanghai');
+const localTimezone = dayjs.tz.guess();
+// dayjs.tz.setDefault('Asia/Shanghai');
 
 console.log('🛠️  icalendar/index.js 脚本开始执行...');
 
@@ -53,12 +53,13 @@ STATUS:CONFIRMED
 END:VEVENT\n`;
 
 function generateContent() {
+  console.log('🛠️  生成 ICS 文件内容...');
   let wrapper = ICS_Template.replace('{{version}}', CalendarJson.version)
     .replace('{{prodId}}', CalendarJson.prodId)
     .replace('{{calScale}}', CalendarJson.calScale)
-    .replace('{{updateTime}}', new Dayjs().format('YYYY-MM-DD HH:mm:ss'))
+    .replace('{{updateTime}}', new dayjs().format('YYYY-MM-DD HH:mm:ss'))
     .replaceAll('{{tzone}}', localTimezone)
-    .replaceAll('{{timezone}}', Dayjs().tz(localTimezone).format('ZZ'));
+    .replaceAll('{{timezone}}', dayjs().tz(localTimezone).format('ZZ'));
 
   let eventsStr = '';
 
@@ -69,7 +70,7 @@ function generateContent() {
       const lunarDate2 = Lunar.fromYmd(year - 1, event.month, event.day);
       const solarDate1 = lunarDate1.getSolar();
       const solarDate2 = lunarDate2.getSolar();
-      eventsStr += generateEvent(event, new Dayjs(
+      eventsStr += generateEvent(event, new dayjs(
         new Date(
           solarDate1.getYear(),
           solarDate1.getMonth() - 1,
@@ -77,7 +78,7 @@ function generateContent() {
         ).toISOString()
       ));
 
-      eventsStr += generateEvent(event, new Dayjs(
+      eventsStr += generateEvent(event, new dayjs(
         new Date(
           solarDate2.getYear(),
           solarDate2.getMonth() - 1,
@@ -85,7 +86,7 @@ function generateContent() {
         ).toISOString()
       ), '_prev');
     } else {
-      eventsStr += generateEvent(event, new Dayjs(
+      eventsStr += generateEvent(event, new dayjs(
         new Date(year, event.month - 1, event.day).toISOString()
       ));
     }
@@ -95,7 +96,7 @@ function generateContent() {
 }
 
 function generateEvent(event, currentDate, suffix = '') {
-  const cdateIOS = new Dayjs().tz(localTimezone).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+  const cdateIOS = new dayjs().tz(localTimezone).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   const dateIOS = currentDate.tz(localTimezone).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   return ICS_Event_Template.replace(
     '{{uid}}',
