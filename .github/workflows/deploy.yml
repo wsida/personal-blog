@@ -45,20 +45,6 @@ jobs:
       - name: Build with VitePress
         run: |
           pnpm run docs:build # 启动项目
-      - name: Build _headers（指定 Content-Type）
-        run: |
-          # 写入 Content-Type 配置到 _headers 文件
-          cd .vitepress/dist
-          cat > .nojekyll << EOF
-          EOF
-          cat > _headers << EOF
-          # 对所有 .json 文件指定 Content-Type
-          /*.json
-            Content-Type: application/json; charset=utf-8
-          # 对所有 .ics 文件指定 Content-Type
-          /*.ics
-            Content-Type: application/ics; charset=utf-8
-          EOF
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3  # 上传构建产物
         with:
