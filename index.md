@@ -21,7 +21,7 @@ hero:
 features:
   - icon: 👨🏻‍💻
     title: 前端工程师
-    details: 还是一名萌新小白，已经从事工作6年+，技术栈主要包括Vue2/Vue3、微信小程序、React等，还需要努力啊！
+    details: 主要从事前端开发，包括但不限Web端、H5、UniApp、小程序开发，目前已经从事工作6年+，技术栈主要包括Vue2/Vue3、微信小程序、React、UniApp等，还需要继续努力啊！
   - icon: 📷
     title: 业余拍照
     details: 一直秉持下班不工作，丢下电脑拾起相机，喜欢到处走走拍拍。手上有一台富士X100F、和一台富士XT5，胶片感🈵️🈵️当当。
